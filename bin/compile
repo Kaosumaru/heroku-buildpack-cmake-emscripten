@@ -13,12 +13,12 @@ BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 curl https://cmake.org/files/v3.6/cmake-3.6.1.tar.gz -s -O
 
 # make dir
-mkdir -p /tmp/cmake/vendor
+mkdir -p /tmp/codon/vendor
 
 # untar the binary to the directory we want
-tar -C /tmp/cmake/vendor -xvf cmake.tar.gz
+tar -C /tmp/codon/vendor -xvf cmake.tar.gz
 
-debug=`ls /tmp/cmake/vendor/bin`
+debug=`ls /tmp/codon/vendor/bin`
 echo $debug
 
 echo $PATH
