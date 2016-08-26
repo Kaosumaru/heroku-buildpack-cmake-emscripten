@@ -9,16 +9,23 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
-# download
-curl https://cmake.org/files/v3.6/cmake-3.6.1.tar.gz -s -O
+#if [ -n "$CACHE_DIR/cmake" ]; then
+	# download
+	curl https://cmake.org/files/v3.6/cmake-3.6.1.tar.gz -s -O
 
-# make dir
-mkdir -p /tmp/codon/vendor
+	# make dir
+	mkdir -p $CACHE_DIR/cmake
 
-# untar the binary to the directory we want
-tar -C /tmp/codon/vendor -xvf cmake-3.6.1.tar.gz
+	# untar the binary to the directory we want
+	tar -C $CACHE_DIR/cmake -xvf cmake-3.6.1.tar.gz
 
-debug=`ls /tmp/codon/vendor/bin`
+	cd $CACHE_DIR/cmake
+	./bootstrap
+	make
+	make install	
+#fi
+
+debug=`ls $CACHE_DIR/cmake`
 echo $debug
 
 echo $PATH
