@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+echo "-----> Installing cmake"
+
+### Configure directories
+BUILD_DIR=${1:-}
+CACHE_DIR=${2:-}
+ENV_DIR=${3:-}
+BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
+
+# download
+curl https://cmake.org/files/v3.6/cmake-3.6.1.tar.gz -s -O
+
+# make dir
+mkdir -p /tmp/cmake/vendor
+
+# untar the binary to the directory we want
+tar -C /tmp/cmake/vendor -xvf cmake.tar.gz
+
+debug=`ls /tmp/cmake/vendor/bin`
+echo $debug
+
+echo $PATH
