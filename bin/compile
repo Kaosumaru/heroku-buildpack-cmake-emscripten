@@ -9,23 +9,23 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
-#if [ -n "$CACHE_DIR/cmake" ]; then
+if [ ! -f "$CACHE_DIR/cmake-3.6.1/bin/cmake" ]; then
+	echo "-----> Downloading cmake"
 	# download
 	curl https://cmake.org/files/v3.6/cmake-3.6.1.tar.gz -s -O
 
-	# make dir
-	mkdir -p $CACHE_DIR/cmake
-
 	# untar the binary to the directory we want
-	tar -C $CACHE_DIR/cmake -xvf cmake-3.6.1.tar.gz
+	tar -C $CACHE_DIR/ -xvf cmake-3.6.1.tar.gz
 
-	cd $CACHE_DIR/cmake
+	cd $CACHE_DIR/cmake-3.6.1
 	./bootstrap
 	make
-	make install	
-#fi
+	make install
+else
+	echo "-----> Cmake exists in cache"
+fi
 
-debug=`ls $CACHE_DIR/cmake`
+
 echo $debug
 
 echo $PATH
